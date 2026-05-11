@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { eq, and } from "drizzle-orm";
-import { db, schema } from "../db";
+import { db, schema } from "../db/index.js";
 
 export const tasksRouter = new Hono();
 

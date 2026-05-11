@@ -8,7 +8,7 @@ import { parse as parseYaml } from "yaml";
 import Database from "better-sqlite3";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { eq } from "drizzle-orm";
-import * as schema from "../db/schema";
+import * as schema from "../db/schema.js";
 
 const SKILLS_REPO = "/tmp/marketingskills/skills";
 const DB_PATH = "./data/marketflow.db";

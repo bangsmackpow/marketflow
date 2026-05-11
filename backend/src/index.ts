@@ -1,8 +1,8 @@
 import "dotenv/config";
 import { serve } from "@hono/node-server";
-import app from "./app";
-import { logger } from "./middleware/logger";
-import { validateEnvironment } from "./lib/env-validator";
+import app from "./app.js";
+import { logger } from "./middleware/logger.js";
+import { validateEnvironment } from "./lib/env-validator.js";
 
 const { valid, warnings } = validateEnvironment();
 

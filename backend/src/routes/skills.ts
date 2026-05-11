@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { eq } from "drizzle-orm";
-import { db, schema } from "../db";
+import { db, schema } from "../db/index.js";
 
 export const skillsRouter = new Hono();
 

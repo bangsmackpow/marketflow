@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import { eq } from "drizzle-orm";
-import { db, schema } from "../db";
-import { GA4Provider } from "../lib/analytics/ga4";
-import { AnalyticsProvider, DEFAULT_METRICS } from "../lib/analytics";
+import { db, schema } from "../db/index.js";
+import { GA4Provider } from "../lib/analytics/ga4.js";
+import { AnalyticsProvider, DEFAULT_METRICS } from "../lib/analytics/index.js";
 
 const providers: AnalyticsProvider[] = [new GA4Provider()];
 

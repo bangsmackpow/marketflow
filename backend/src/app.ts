@@ -1,18 +1,18 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { auth } from "./auth/config";
-import { tenantGuard } from "./middleware/tenant";
-import { requestLogger } from "./middleware/logger";
-import { apiRateLimit, generateRateLimit } from "./middleware/rate-limit";
-import { healthRouter } from "./routes/health";
-import { skillsRouter } from "./routes/skills";
-import { tasksRouter } from "./routes/tasks";
-import { authRouter } from "./routes/auth";
-import { companiesRouter } from "./routes/companies";
-import { analyticsRouter } from "./routes/analytics";
-import { generateRouter } from "./routes/generate";
-import { adminRouter } from "./routes/admin";
+import { auth } from "./auth/config.js";
+import { tenantGuard } from "./middleware/tenant.js";
+import { requestLogger } from "./middleware/logger.js";
+import { apiRateLimit, generateRateLimit } from "./middleware/rate-limit.js";
+import { healthRouter } from "./routes/health.js";
+import { skillsRouter } from "./routes/skills.js";
+import { tasksRouter } from "./routes/tasks.js";
+import { authRouter } from "./routes/auth.js";
+import { companiesRouter } from "./routes/companies.js";
+import { analyticsRouter } from "./routes/analytics.js";
+import { generateRouter } from "./routes/generate.js";
+import { adminRouter } from "./routes/admin.js";
 
 const app = new Hono<{
   Variables: {

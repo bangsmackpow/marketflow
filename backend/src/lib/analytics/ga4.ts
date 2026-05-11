@@ -1,4 +1,4 @@
-import { AnalyticsProvider, AnalyticsData, ConnectParams, DEFAULT_METRICS } from "./index";
+import { AnalyticsProvider, AnalyticsData, ConnectParams, DEFAULT_METRICS } from "./index.js";
 
 export class GA4Provider extends AnalyticsProvider {
   key = "ga4";

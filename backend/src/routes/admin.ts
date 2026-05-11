@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { eq, sql } from "drizzle-orm";
-import { db, schema } from "../db";
-import { logger } from "../middleware/logger";
+import { db, schema } from "../db/index.js";
+import { logger } from "../middleware/logger.js";
 
 type AppVars = {
   user: { id: string; email: string; name: string; image?: string | null } | null;

@@ -2,6 +2,7 @@ node_modules/
 dist/
 data/
 backend/dist/
+*.tsbuildinfo
 .env
 *.db
 *.db-journal
