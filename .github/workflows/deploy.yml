@@ -54,13 +54,26 @@ jobs:
     name: Trigger Portainer Redeploy
     needs: build-and-push
     runs-on: ubuntu-latest
-    if: secrets.PORTAINER_WEBHOOK_URL != ''
 
     steps:
-      - name: Notify Portainer via webhook
+      - name: Check webhook URL
+        id: check
+        env:
+          WEBHOOK: ${{ secrets.PORTAINER_WEBHOOK_URL }}
         run: |
-          curl -sS -X POST "${{ secrets.PORTAINER_WEBHOOK_URL }}" \
+          if [ -z "$WEBHOOK" ]; then
+            echo "webhook=skip" >> $GITHUB_OUTPUT
+          else
+            echo "webhook=ready" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Notify Portainer via webhook
+        if: steps.check.outputs.webhook == 'ready'
+        env:
+          WEBHOOK_URL: ${{ secrets.PORTAINER_WEBHOOK_URL }}
+        run: |
+          curl -sS -X POST "$WEBHOOK_URL" \
             -H "Content-Type: application/json" \
             --max-time 30 \
-            --fail-with-body
+            --fail-with-body || echo "Webhook failed, continuing..."
         shell: bash
