@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: marketflow
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: ${DATABASE_URL:-./data/marketflow.db}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?err}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3000}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      ADMIN_EMAILS: ${ADMIN_EMAILS:-}
+    volumes:
+      - marketflow-data:/app/data
+
+volumes:
+  marketflow-data:
