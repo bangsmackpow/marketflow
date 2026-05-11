@@ -17,7 +17,7 @@ RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 appuser
 
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=build /app/backend/dist/src ./backend
+COPY --from=build /app/backend/dist ./backend/dist
 COPY --from=build /app/dist/client ./dist/client
 COPY --from=build /app/package.json ./
 
@@ -28,4 +28,4 @@ ENV NODE_ENV=production
 ENV PORT=3000
 EXPOSE 3000
 
-CMD ["node", "backend/index.js"]
+CMD ["node", "backend/dist/index.js"]
