@@ -27,6 +27,7 @@ sqlite.exec(`
 
   CREATE TABLE IF NOT EXISTS "session" (
     "id" text PRIMARY KEY NOT NULL,
+    "token" text NOT NULL UNIQUE,
     "user_id" text NOT NULL REFERENCES "user"("id") ON DELETE CASCADE,
     "expires_at" integer NOT NULL,
     "ip_address" text,

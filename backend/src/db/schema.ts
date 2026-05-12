@@ -14,6 +14,7 @@ export const user = sqliteTable("user", {
 
 export const session = sqliteTable("session", {
   id: text("id").primaryKey(),
+  token: text("token").notNull().unique(),
   userId: text("user_id").notNull().references(() => user.id, { onDelete: "cascade" }),
   expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
   ipAddress: text("ip_address"),
