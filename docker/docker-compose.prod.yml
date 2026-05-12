@@ -19,6 +19,11 @@ services:
       GA4_CLIENT_SECRET: ${GA4_CLIENT_SECRET:-}
       GA4_PROPERTY_ID: ${GA4_PROPERTY_ID:-}
       ADMIN_EMAILS: ${ADMIN_EMAILS:-}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      ADMIN_NAME: ${ADMIN_NAME:-Admin}
+      ADMIN_COMPANY: ${ADMIN_COMPANY:-Built Networks}
+      ADMIN_SLUG: ${ADMIN_SLUG:-built-networks}
       BACKUP_DIR: /app/data/backups
     volumes:
       - marketflow-data:/app/data
