@@ -127,5 +127,19 @@ sqlite.exec(`
   );
 `);
 
+const migrations = [
+  `DELETE FROM "session"`,
+  `ALTER TABLE "session" ADD COLUMN "token" text NOT NULL DEFAULT ''`,
+  `CREATE UNIQUE INDEX IF NOT EXISTS "idx_session_token" ON "session"("token")`,
+];
+
+for (const stmt of migrations) {
+  try {
+    sqlite.exec(stmt);
+  } catch {
+    // Migration already applied, skipping
+  }
+}
+
 sqlite.close();
 console.log("[Migrate] Tables created successfully");
