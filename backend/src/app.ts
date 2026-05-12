@@ -24,17 +24,17 @@ const app = new Hono<{
 
 app.use("*", requestLogger);
 
-app.use(
-  "/api/v1/auth/*",
-  cors({
-    origin: process.env.BETTER_AUTH_URL || "http://localhost:3001",
-    allowHeaders: ["Content-Type", "Authorization", "X-Company-Id"],
-    allowMethods: ["POST", "GET", "OPTIONS"],
-    exposeHeaders: ["Content-Length"],
-    maxAge: 600,
-    credentials: true,
-  })
-);
+const authCors = cors({
+  origin: process.env.BETTER_AUTH_URL || "http://localhost:3001",
+  allowHeaders: ["Content-Type", "Authorization", "X-Company-Id"],
+  allowMethods: ["POST", "GET", "OPTIONS"],
+  exposeHeaders: ["Content-Length"],
+  maxAge: 600,
+  credentials: true,
+});
+
+app.use("/api/auth/*", authCors);
+app.use("/api/v1/auth/*", authCors);
 
 app.use("*", async (c, next) => {
   const session = await auth.api.getSession({ headers: c.req.raw.headers });
@@ -43,6 +43,7 @@ app.use("*", async (c, next) => {
   await next();
 });
 
+app.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw));
 app.on(["POST", "GET"], "/api/v1/auth/*", (c) => auth.handler(c.req.raw));
 
 app.route("/api/v1/health", healthRouter);
