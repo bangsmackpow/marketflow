@@ -1,8 +1,8 @@
 import { createMiddleware } from "hono/factory";
 import { eq, and } from "drizzle-orm";
-import { db, schema } from "../db/index.js";
+import { db, schema } from "../db";
 
-interface TenantContext {
+export interface TenantContext {
   userId: string;
   companyId: string;
   role: string;
@@ -22,7 +22,9 @@ export const tenantGuard = createMiddleware(async (c, next) => {
 
   const companyId = c.req.header("X-Company-Id");
   if (!companyId) {
-    return c.json({ error: "X-Company-Id header is required" }, 400);
+    c.set("tenant", null);
+    await next();
+    return;
   }
 
   const membership = await db

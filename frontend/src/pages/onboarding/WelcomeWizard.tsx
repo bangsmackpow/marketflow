@@ -76,7 +76,7 @@ export default function WelcomeWizard() {
     setLoading(true);
     setError("");
 
-    const { error: orgError } = await authClient.organization.create({
+    const { data: org, error: orgError } = await authClient.organization.create({
       name: data.companyName,
       slug: data.slug,
     });
@@ -85,6 +85,10 @@ export default function WelcomeWizard() {
       setError(orgError.message || "Failed to create company");
       setLoading(false);
       return;
+    }
+
+    if (org?.id) {
+      await authClient.organization.setActive({ organizationId: org.id });
     }
 
     const profile = getDesignProfile(data.industry);

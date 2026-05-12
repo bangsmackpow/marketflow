@@ -45,9 +45,7 @@ export default function App() {
         path="/onboarding"
         element={
           <ProtectedRoute>
-            <DesignSystemApplier>
-              <WelcomeWizard />
-            </DesignSystemApplier>
+            <WelcomeWizard />
           </ProtectedRoute>
         }
       />
