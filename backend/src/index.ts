@@ -3,6 +3,7 @@ import { serve } from "@hono/node-server";
 import app from "./app.js";
 import { logger } from "./middleware/logger.js";
 import { validateEnvironment } from "./lib/env-validator.js";
+import "./db/migrate.js";
 
 const { valid, warnings } = validateEnvironment();
 

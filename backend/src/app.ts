@@ -62,7 +62,13 @@ app.route("/api/v1/generate", generateRouter);
 app.route("/api/v1/admin", adminRouter);
 
 if (process.env.NODE_ENV === "production") {
-  app.use("/*", serveStatic({ root: "./dist/client" }));
+  app.use("/assets/*", serveStatic({ root: "./dist/client" }));
+  app.use("/favicon.ico", serveStatic({ root: "./dist/client" }));
+  app.get("*", async (c) => {
+    if (c.req.path.startsWith("/api/")) return c.notFound();
+    const { readFileSync } = await import("fs");
+    return c.html(readFileSync("./dist/client/index.html", "utf-8"));
+  });
 }
 
 export default app;
