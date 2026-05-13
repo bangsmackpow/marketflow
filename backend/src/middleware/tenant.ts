@@ -1,6 +1,6 @@
 import { createMiddleware } from "hono/factory";
 import { eq, and } from "drizzle-orm";
-import { db, schema } from "../db";
+import { db, schema } from "../db/index.js";
 
 export interface TenantContext {
   userId: string;
